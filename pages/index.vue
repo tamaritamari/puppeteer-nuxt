@@ -3,7 +3,7 @@
     <div>
       <logo />
       <h1 class="title">
-        puppeteer-nuxt
+        トップページです
       </h1>
       <div class="links">
         <a

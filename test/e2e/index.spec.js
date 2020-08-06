@@ -1,3 +1,7 @@
+const { toMatchImageSnapshot } = require('jest-image-snapshot')
+
+expect.extend({ toMatchImageSnapshot })
+
 describe('Index page', () => {
   let page
 
@@ -16,5 +20,8 @@ describe('Index page', () => {
     const text = await page.evaluate(() => document.body.textContent)
 
     await expect(text).toContain('トップページです')
+
+    const screenshot = await page.screenshot()
+    expect(screenshot).toMatchImageSnapshot()
   })
 })

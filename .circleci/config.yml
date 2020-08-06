@@ -4,5 +4,4 @@ jobs:
     docker:
       - image: circleci/node:10-browsers
     steps:
-      ...
       - run: yarn run test:e2e

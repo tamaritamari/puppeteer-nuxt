@@ -1,8 +1,12 @@
-version: 2
+version: 2.1
+executors:
+  my-executor:
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers
+
 jobs:
   build:
-    docker:
-      - image: circleci/node:10-browsers
+    executor: my-executor
     steps:
-      - run: ls
+      - checkout
       - run: yarn run test:e2e

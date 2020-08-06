@@ -9,5 +9,6 @@ jobs:
     executor: my-executor
     steps:
       - checkout
+      - run: node --version
       - run: yarn
       - run: yarn run test:e2e

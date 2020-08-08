@@ -1,11 +1,27 @@
 version: 2.1
+
+parameters:
+  run_integration_tests:
+    type: boolean
+    default: true
+  update_image_snapshot:
+    type: boolean
+    default: false
+
 executors:
   my-executor:
     docker:
       - image: circleci/node:latest-browsers
 
+workflows:
+  version: 2
+  integration_tests:
+    when: << pipeline.parameters.run_integration_tests >>
+    jobs:
+      - test
+
 jobs:
-  build:
+  test:
     executor: my-executor
     steps:
       - checkout
@@ -13,6 +29,23 @@ jobs:
       - run: node --version
       - run: yarn
       - run: yarn run test:e2e-on-ci
+  # you can run that on command
+  # curl -u {$CIRCLE_API_USER_TOKEN}: \
+  #   -d build_parameters[CIRCLE_JOB]=update_image_snapshot \
+  #   https://circleci.com/api/v1.1/project/github/tamaritamari/puppeteer-nuxt/tree/develop
+
+  # v2
+# curl -u {$CIRCLE_API_USER_TOKEN}: \
+#   -X POST \
+#   -H "Content-Type: application/json" \
+#   -d '{"branch":"develop","parameters":{"messages":"hello,world!"}}' \
+#   https://circleci.com/api/v2/project/gh/tamaritamari/puppeteer-nuxt/pipeline
+
+# curl -u {$CIRCLE_API_USER_TOKEN}: \
+#   -X POST \
+#   -H "Content-Type: application/json" \
+#   https://circleci.com/api/v2/project/gh/tamaritamari/puppeteer-nuxt/pipeline
+
   update_image_snapshot:
     executor: my-executor
     steps:

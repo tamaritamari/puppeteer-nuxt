@@ -13,3 +13,8 @@ jobs:
       - run: node --version
       - run: yarn
       - run: yarn run test:e2e-on-ci
+  update_image_snapshot:
+    executor: my-executor
+    steps:
+      - checkout
+      - run: echo "you are succeed trigger job by api"

@@ -18,6 +18,12 @@ class ImageReporter {
   }
 
   async onTestResult(test, testResult, aggregateResults) {
+    const branchName = process.env.CIRCLE_BRANCH
+    if (!branchName) {
+      console.log(
+        'CircleCi上でブランチ名が取得できません。CircleCi上で実行していますか?'
+      )
+    }
     if (
       testResult.numFailingTests &&
       testResult.failureMessage.match(/different from snapshot/)
@@ -26,7 +32,7 @@ class ImageReporter {
         './test/e2e/__image_snapshots__/__diff_output__/'
       )
       await files.forEach(async (value) => {
-        const path = `diff_output/${value}`
+        const path = `${branchName}/diff_output/${value}`
         const params = {
           Body: fs.readFileSync(
             `./test/e2e/__image_snapshots__/__diff_output__/${value}`

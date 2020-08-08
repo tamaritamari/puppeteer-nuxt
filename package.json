@@ -11,6 +11,7 @@
     "lint": "yarn lint:js",
     "test": "jest --config jest.config.js ./test/components",
     "test:e2e": "jest --config jest.e2e.config.js --runInBand ./test/e2e",
+    "test:e2e-on-ci": "jest --config jest.e2e.config.js --runInBand ./test/e2e --reporters='default' --reporters='<rootDir>/image-reporter.js'",
     "testServer": "nuxt build && nuxt start --port 3000"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
     "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@vue/test-utils": "^1.0.3",
+    "aws-sdk": "^2.728.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.0.1",

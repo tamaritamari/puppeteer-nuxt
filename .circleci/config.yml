@@ -9,6 +9,7 @@ jobs:
     executor: my-executor
     steps:
       - checkout
+      - run: echo ${CIRCLE_BRANCH}
       - run: node --version
       - run: yarn
-      - run: yarn run test:e2e
+      - run: yarn run test:e2e-on-ci

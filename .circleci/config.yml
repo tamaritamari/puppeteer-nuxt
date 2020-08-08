@@ -32,6 +32,7 @@ jobs:
       - run: echo ${CIRCLE_BRANCH}
       - run: node --version
       - run: yarn
+      - run: git status
       - run: yarn run test:e2e-on-ci
 
   # you can run that on command

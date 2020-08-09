@@ -32,12 +32,13 @@ jobs:
       - run: echo ${CIRCLE_BRANCH}
       - run: node --version
       - run: yarn
-      - run: |
-          if [$(git status --porcelain 2>/dev/null | grep "^??" | wc -l) -ge 1 ] ; then
-            echo "exist untracked file"
-          else 
-            echo "no untracked file"
-          fi
+      # いらないかも
+      # - run: |
+      #     if [$(git status --porcelain 2>/dev/null | grep "^??" | wc -l) -ge 1 ] ; then
+      #       echo "exist untracked file"
+      #     else 
+      #       echo "no untracked file"
+      #     fi
       - run: yarn run test:e2e-on-ci
 
   # you can run that on command

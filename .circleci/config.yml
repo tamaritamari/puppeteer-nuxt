@@ -29,9 +29,7 @@ jobs:
     executor: my-executor
     steps:
       - checkout
-      - run: sudo apt -qqy --no-install-recommends install -y fonts-takao-gothic fonts-takao-mincho &&
-      sudo dpkg-reconfigure --frontend noninteractive locales &&
-      sudo fc-cache -fv
+      - run: sudo apt -qqy --no-install-recommends install -y fonts-takao-gothic fonts-takao-mincho && sudo dpkg-reconfigure --frontend noninteractive locales && sudo fc-cache -fv
       - run: echo ${CIRCLE_BRANCH}
       - run: node --version
       - run: yarn

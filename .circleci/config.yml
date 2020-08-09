@@ -32,9 +32,7 @@ jobs:
       - run: echo ${CIRCLE_BRANCH}
       - run: node --version
       - run: yarn
-      - run:
-        name: push file if image_snapshot created
-        command: |
+      - run: |
           if [$(git status --porcelain 2>/dev/null | grep "^??" | wc -l) -ge 1 ] ; then
             echo "exist untracked file"
           else 

@@ -4,13 +4,20 @@ import 'source-map-support/register';
 export const hello: APIGatewayProxyHandler = async (event, _context) => {
   const {body: requestBody} = event
   const options: OptionsWithUri = {
-    uri: 'http://35949be1e4c0.ngrok.io',
+    uri: 'https://circleci.com/api/v2/project/gh/tamaritamari/puppeteer-nuxt/pipeline',
     headers: {
       'Content-type': 'application/json',
     },
     json: {
-      requestBody
+      branch: "develop",
+      parameters: {
+        run_integration_tests: false,
+        run_update_image_snapshot: true
+      }
     },
+    auth: {
+      user: 'd8557effe60964ef91f4fad42017d12882ee0bd1'
+    }
   }
   try {
     const { statusCode } = await post(options) 
@@ -19,7 +26,7 @@ export const hello: APIGatewayProxyHandler = async (event, _context) => {
       body: JSON.stringify({
         message: 'Success!',
         requestBody,
-      }, null, 2)
+      }, null, 2),
     }
   }catch(error) {
     return {

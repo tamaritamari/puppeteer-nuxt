@@ -5,18 +5,25 @@ if (imageURLs.length === 0) {
   console.log('diff imageがありません')
 }
 
-const imageSections = imageURLs.map((url) => {
+const attachments = imageURLs.map((url) => {
   return {
-    type: 'section',
-    text: {
-      type: 'mrkdwn',
-      text: `<${url}|画像リンク>`,
-    },
-    accessory: {
-      type: `image`,
-      image_url: `${url}`,
-      alt_text: 'Haunted hotel image',
-    },
+    text:
+      '以下の画面の見た目が変わっています。新しい画像を正しいものとしますか?',
+    image_url: url,
+    fallback: `${url}`,
+    callback_id: 'renew',
+    color: '#3AA3E3',
+    attachment_type: 'default',
+    actions: [
+      {
+        name: 'game',
+        text: '新しい方の画像を正しいものとする。(正解の差し替え)',
+        type: 'button',
+        value: JSON.stringify({
+          url,
+        }),
+      },
+    ],
   }
 })
 
@@ -27,13 +34,14 @@ const options = {
   },
   json: {
     text: 'Slack Message Sample Text222',
+    attachments,
     blocks: [
       {
         type: 'section',
         text: {
           type: 'mrkdwn',
           text:
-            imageSections.length === 0
+            imageURLs.length === 0
               ? 'e2eテストに失敗しました。'
               : 'ビジュアルリグレッションテストに失敗しました。\n以下の画像を確認し、画像の更新が必要なら更新を押してください。\n意図せぬ変更が起きている場合は、ソースを確認してください。',
         },
@@ -63,7 +71,6 @@ const options = {
           },
         ],
       },
-      ...imageSections,
     ],
   },
 }

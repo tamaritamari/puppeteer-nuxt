@@ -22,7 +22,7 @@ const imageSections = imageURLs.map((url) => {
 
 const options = {
   uri:
-    'https://hooks.slack.com/services/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',
+    'https://hooks.slack.com/services/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',
   headers: {
     'Content-type': 'application/json',
   },

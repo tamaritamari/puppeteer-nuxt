@@ -41,6 +41,11 @@ jobs:
       #       echo "no untracked file"
       #     fi
       - run: yarn run test:e2e-on-ci
+      - run:
+        name: on fail
+        command:
+          cat diffImagesURLs.txt | xargs node slack-notification.js
+        when: on_fail
 
   # you can run that on command
   # curl -u {$CIRCLE_API_USER_TOKEN}: \

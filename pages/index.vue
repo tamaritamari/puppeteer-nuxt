@@ -3,7 +3,7 @@
     <div>
       <logo />
       <h1 class="title">
-        トップページです
+        this is top page
       </h1>
       <div class="links">
         <a

@@ -19,7 +19,7 @@ describe('Index page', () => {
   it('Display catch copy ', async () => {
     const text = await page.evaluate(() => document.body.textContent)
 
-    await expect(text).toContain('トップページです')
+    await expect(text).toContain('this is top page')
 
     const screenshot = await page.screenshot()
     expect(screenshot).toMatchImageSnapshot()

@@ -54,7 +54,9 @@ class ImageReporter {
               'diffImagesURLs.txt',
               `https://${UPLOAD_BUCKET}.s3.amazonaws.com/${path}`,
               (err) => {
-                console.log(`you failed on save images log on error: ${err}`)
+                if (err) {
+                  console.log(`you failed on save images log on error: ${err}`)
+                }
               }
             )
           }

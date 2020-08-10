@@ -33,25 +33,11 @@ jobs:
       - run: echo ${CIRCLE_BRANCH}
       - run: node --version
       - run: yarn
-      # いらないかも
-      # - run: |
-      #     if [$(git status --porcelain 2>/dev/null | grep "^??" | wc -l) -ge 1 ] ; then
-      #       echo "exist untracked file"
-      #     else 
-      #       echo "no untracked file"
-      #     fi
       - run: yarn run test:e2e-on-ci
       - run:
           name: on fail
           command: cat diffImagesURLs.txt | xargs node slack-notification.js
           when: on_fail
-
-  # you can run that on command
-  # curl -u {$CIRCLE_API_USER_TOKEN}: \
-  #   -X POST \
-  #   -H "Content-Type: application/json" \
-  #   -d '{"branch":"develop","parameters":{"run_integration_tests":false,"run_update_image_snapshot":true}}' \
-  #   https://circleci.com/api/v2/project/gh/tamaritamari/puppeteer-nuxt/pipeline
 
   update_image_snapshot:
     executor: my-executor

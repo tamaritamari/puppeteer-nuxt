@@ -21,8 +21,7 @@ const imageSections = imageURLs.map((url) => {
 })
 
 const options = {
-  uri:
-    'https://hooks.slack.com/services/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',
+  uri: process.env.SLACK_WEB_HOOK_URL,
   headers: {
     'Content-type': 'application/json',
   },

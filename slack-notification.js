@@ -6,6 +6,16 @@ if (imageURLs.length === 0) {
 }
 
 const attachments = imageURLs.map((url) => {
+  const branch = url.split('/')[3]
+  const splitedTestNames = url
+    .split('/')[5]
+    .replace(/-\d-diff\.png/, '')
+    .split('-')
+  const filenameEndIndex = splitedTestNames.findIndex(
+    (name) => name === 'ts' || name === 'js'
+  )
+  const testNamePatten = splitedTestNames.splice(filenameEndIndex + 1)
+
   return {
     text:
       '以下の画面の見た目が変わっています。新しい画像を正しいものとしますか?',
@@ -21,6 +31,8 @@ const attachments = imageURLs.map((url) => {
         type: 'button',
         value: JSON.stringify({
           url,
+          branch,
+          testNamePatten,
         }),
       },
     ],

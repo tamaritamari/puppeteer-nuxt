@@ -31,6 +31,9 @@ class ImageReporter {
       const files = fs.readdirSync(
         './test/e2e/__image_snapshots__/__diff_output__/'
       )
+      const diffImagesURLsLogger = fs.createWriteStream('diffImagesURLs.txt', {
+        flags: 'a',
+      })
       await files.forEach(async (value) => {
         const path = `${branchName}/diff_output/${value}`
         const params = {
@@ -41,7 +44,7 @@ class ImageReporter {
           Key: path,
           ContentType: 'image/png',
         }
-        await s3.putObject(params, (err) => {
+        await s3.putObject(params, async (err) => {
           if (err) {
             console.log(err, err.stack)
           } else {
@@ -50,9 +53,16 @@ class ImageReporter {
                 `Uploaded image diff file to https://${UPLOAD_BUCKET}.s3.amazonaws.com/${path}`
               )
             )
+            await diffImagesURLsLogger.write(
+              'https://${UPLOAD_BUCKET}.s3.amazonaws.com/${path}`',
+              (err) => {
+                console.log(`you failed on save images log on error: ${err}`)
+              }
+            )
           }
         })
       })
+      diffImagesURLsLogger.close()
     }
   }
 }

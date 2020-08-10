@@ -29,18 +29,18 @@ jobs:
     executor: my-executor
     steps:
       - checkout
-      # - run: sudo apt -qqy --no-install-recommends install -y fonts-takao-gothic fonts-takao-mincho && sudo dpkg-reconfigure --frontend noninteractive locales && sudo fc-cache -fv
-      # - run: echo ${CIRCLE_BRANCH}
-      # - run: node --version
-      # - run: yarn
-      # - run: yarn run test:e2e-on-ci
-      # - run:
-      #     name: on fail
-      #     command: cat diffImagesURLs.txt | xargs node slack-notification.js
-      #     when: on_fail
+      - run: sudo apt -qqy --no-install-recommends install -y fonts-takao-gothic fonts-takao-mincho && sudo dpkg-reconfigure --frontend noninteractive locales && sudo fc-cache -fv
+      - run: echo ${CIRCLE_BRANCH}
+      - run: node --version
+      - run: yarn
+      - run: yarn run test:e2e-on-ci
+      - run:
+          name: on fail
+          command: cat diffImagesURLs.txt | xargs node slack-notification.js
+          when: on_fail
 
   update_image_snapshot:
     executor: my-executor
     steps:
       - checkout
-      # - run: echo "you are succeed trigger job by api"
+      - run: echo "you are succeed trigger job by api"

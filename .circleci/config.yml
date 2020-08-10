@@ -7,6 +7,9 @@ parameters:
   run_update_image_snapshot:
     type: boolean
     default: false
+  test_name_pattern:
+    type: string
+    default: ''
 
 executors:
   my-executor:
@@ -43,4 +46,5 @@ jobs:
     executor: my-executor
     steps:
       - checkout
+      - run: echo << pipeline.parameters.test_name_pattern >>
       - run: echo "you are succeed trigger job by api"

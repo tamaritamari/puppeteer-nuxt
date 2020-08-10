@@ -37,6 +37,7 @@
     "jest-puppeteer-preset": "^4.4.0",
     "prettier": "^2.0.5",
     "puppeteer": "^5.2.1",
+    "serverless": "^1.78.1",
     "vue-jest": "^3.0.4"
   }
 }

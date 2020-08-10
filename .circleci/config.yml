@@ -48,3 +48,8 @@ jobs:
       - checkout
       - run: echo << pipeline.parameters.test_name_pattern >>
       - run: echo "you are succeed trigger job by api"
+      - run: yarn
+      - run: yarn jest --config jest.e2e.config.js --runInBand ./test/e2e --updateSnapshot --testNamePattern="<< pipeline.parameters.test_name_pattern >>"
+      - run: git add ./test/e2e/__image_snapshots__/
+      - run: git commit -m "update snapshot on circle ci"
+      - run: git push

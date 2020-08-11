@@ -53,7 +53,7 @@ export default {
   display: block;
   font-weight: 300;
   font-size: 100px;
-  color: yellow;
+  color: blue;
   letter-spacing: 1px;
 }
 

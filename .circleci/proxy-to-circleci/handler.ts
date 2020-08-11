@@ -1,7 +1,7 @@
 import { APIGatewayProxyHandler } from 'aws-lambda';
 import { post, OptionsWithUri } from "request-promise"
 import 'source-map-support/register';
-export const hello: APIGatewayProxyHandler = async (event, _context) => {
+export const triggerImageUpdate: APIGatewayProxyHandler = async (event, _context) => {
 
   const {body} = event
   const {actions} = JSON.parse(decodeURIComponent(body).replace("payload=", ''))

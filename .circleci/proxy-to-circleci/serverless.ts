@@ -29,13 +29,13 @@ const serverlessConfiguration: Serverless = {
     },
   },
   functions: {
-    hello: {
-      handler: 'handler.hello',
+    trigger_image_update: {
+      handler: 'handler.triggerImageUpdate',
       events: [
         {
           http: {
             method: 'post',
-            path: 'hello',
+            path: 'trigger_image_update',
           }
         }
       ]

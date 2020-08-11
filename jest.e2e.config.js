@@ -1,4 +1,7 @@
 module.exports = {
   verbose: true,
-  preset: 'jest-puppeteer'
+  preset: 'jest-puppeteer',
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest',
+  },
 }

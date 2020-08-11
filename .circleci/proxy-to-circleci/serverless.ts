@@ -24,7 +24,7 @@ const serverlessConfiguration: Serverless = {
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      CIRCLE_CI_PIPELINE_URL: `https://circleci.com/api/v2/project/${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}/pipeline`,
+      CIRCLE_CI_PIPELINE_URL: `https://circleci.com/api/v2/project/gh/${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}/pipeline`,
       CIRCLE_API_USER_TOKEN: process.env.CIRCLE_API_USER_TOKEN
     },
   },

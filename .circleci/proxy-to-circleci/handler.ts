@@ -8,7 +8,7 @@ export const hello: APIGatewayProxyHandler = async (event, _context) => {
   const selectedActionValues = JSON.parse(actions[0].value)
 
   const options: OptionsWithUri = {
-    uri: 'https://circleci.com/api/v2/project/gh/tamaritamari/puppeteer-nuxt/pipeline',
+    uri: process.env.CIRCLE_CI_PIPELINE_URL,
     headers: {
       'Content-type': 'application/json',
     },
@@ -21,7 +21,7 @@ export const hello: APIGatewayProxyHandler = async (event, _context) => {
       }
     },
     auth: {
-      user: 'd8557effe60964ef91f4fad42017d12882ee0bd1'
+      user: process.env.CIRCLE_API_USER_TOKEN
     }
   }
   try {

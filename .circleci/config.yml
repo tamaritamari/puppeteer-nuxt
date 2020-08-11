@@ -51,5 +51,7 @@ jobs:
       - run: yarn
       - run: yarn jest --config jest.e2e.config.js --runInBand ./test/e2e --updateSnapshot --testNamePattern="<< pipeline.parameters.test_name_pattern >>"
       - run: git add ./test/e2e/__image_snapshots__/
+      - run: git config user.email "tamari@minacare.co.jp"
+      - run: git config user.name "tamaritamari"
       - run: git commit -m "update snapshot on circle ci"
       - run: git push

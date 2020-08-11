@@ -5,6 +5,7 @@ export const hello: APIGatewayProxyHandler = async (event, _context) => {
 
   const {body} = event
   const {actions} = JSON.parse(decodeURIComponent(body).replace("payload=", ''))
+  const selectedActionValues = JSON.parse(actions[0].value)
 
   const options: OptionsWithUri = {
     uri: 'https://circleci.com/api/v2/project/gh/tamaritamari/puppeteer-nuxt/pipeline',
@@ -12,11 +13,11 @@ export const hello: APIGatewayProxyHandler = async (event, _context) => {
       'Content-type': 'application/json',
     },
     json: {
-      branch: actions.branch,
+      branch: selectedActionValues.branch,
       parameters: {
         run_integration_tests: false,
         run_update_image_snapshot: true,
-        test_name_pattern: actions.testNamePatten.join(" ")
+        test_name_pattern: selectedActionValues.testNamePatten.join(" ")
       }
     },
     auth: {

@@ -19,9 +19,11 @@ const serverlessConfiguration: Serverless = {
   provider: {
     name: 'aws',
     runtime: 'nodejs12.x',
+    region: 'ap-northeast-1',
     apiGateway: {
       minimumCompressionSize: 1024,
     },
+    stackTags: {serviceName: "genki-labo-front-ci"},
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
       CIRCLE_CI_PIPELINE_URL: `https://circleci.com/api/v2/project/gh/${process.env.PROJECT_OWNER}/${process.env.PROJECT_NAME}/pipeline`,

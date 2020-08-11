@@ -12,6 +12,8 @@ AWS.config = new AWS.Config({
 const s3 = new AWS.S3({ apiVersion: '2006-03-01' })
 
 class ImageReporter {
+  _globalConfig: any
+  _options: any
   constructor(globalConfig, options) {
     this._globalConfig = globalConfig
     this._options = options

@@ -11,7 +11,7 @@
     "lint": "yarn lint:js",
     "test": "jest --config jest.config.js ./test/components",
     "test:e2e": "jest --config jest.e2e.config.js --runInBand ./test/e2e",
-    "test:e2e-on-ci": "jest --config jest.e2e.config.js --runInBand ./test/e2e --reporters='default' --reporters='<rootDir>/test/e2e/utils/image-reporter.js'",
+    "test:e2e-on-ci": "jest --config jest.e2e.config.js --runInBand ./test/e2e --reporters='default' --reporters='<rootDir>/test/e2e/utils/image-reporter.ts'",
     "testServer": "nuxt build && nuxt start --port 3000"
   },
   "dependencies": {

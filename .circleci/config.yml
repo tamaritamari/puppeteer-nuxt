@@ -39,7 +39,7 @@ jobs:
       - run: yarn run test:e2e-on-ci
       - run:
           name: on fail
-          command: cat diffImagesURLs.txt | xargs node slack-notification.js
+          command: cat diffImagesURLs.txt | xargs node test/e2e/utils/slack-notification.js
           when: on_fail
 
   update_image_snapshot:

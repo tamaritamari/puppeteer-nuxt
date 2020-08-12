@@ -1,8 +1,57 @@
-version: 2
-jobs:
-  build:
+version: 2.1
+
+parameters:
+  run_integration_tests:
+    type: boolean
+    default: true
+  run_update_image_snapshot:
+    type: boolean
+    default: false
+  test_name_pattern:
+    type: string
+    default: ''
+
+executors:
+  my-executor:
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/node:latest-browsers
+
+workflows:
+  version: 2
+  integration_tests:
+    when: << pipeline.parameters.run_integration_tests >>
+    jobs:
+      - test
+  update_image_snapshot:
+    when: << pipeline.parameters.run_update_image_snapshot >>
+    jobs:
+      - update_image_snapshot
+
+jobs:
+  test:
+    executor: my-executor
     steps:
-      ...
-      - run: yarn run test:e2e
+      - checkout
+      - run: sudo apt -qqy --no-install-recommends install -y fonts-takao-gothic fonts-takao-mincho && sudo dpkg-reconfigure --frontend noninteractive locales && sudo fc-cache -fv
+      - run: echo ${CIRCLE_BRANCH}
+      - run: node --version
+      - run: yarn
+      - run: yarn run test:e2e-on-ci
+      - run:
+          name: on fail
+          command: cat diffImagesURLs.txt | xargs node test/e2e/utils/slack-notification.js
+          when: on_fail
+
+  update_image_snapshot:
+    executor: my-executor
+    steps:
+      - checkout
+      - run: echo << pipeline.parameters.test_name_pattern >>
+      - run: echo "you are succeed trigger job by api"
+      - run: yarn
+      - run: yarn jest --config jest.e2e.config.js --runInBand ./test/e2e --updateSnapshot --testNamePattern="<< pipeline.parameters.test_name_pattern >>"
+      - run: git add ./test/e2e/__image_snapshots__/
+      - run: git config user.email "tamari@minacare.co.jp"
+      - run: git config user.name "tamaritamari"
+      - run: git commit -m "update snapshot on circle ci"
+      - run: git push -u origin $CIRCLE_BRANCH

@@ -3,7 +3,7 @@
     <div>
       <logo />
       <h1 class="title">
-        puppeteer-nuxt
+        this is top page
       </h1>
       <div class="links">
         <a
@@ -53,7 +53,7 @@ export default {
   display: block;
   font-weight: 300;
   font-size: 100px;
-  color: #35495e;
+  color: black;
   letter-spacing: 1px;
 }
 

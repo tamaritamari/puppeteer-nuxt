@@ -11,16 +11,19 @@
     "lint": "yarn lint:js",
     "test": "jest --config jest.config.js ./test/components",
     "test:e2e": "jest --config jest.e2e.config.js --runInBand ./test/e2e",
+    "test:e2e-on-ci": "jest --config jest.e2e.config.js --runInBand ./test/e2e --reporters='default' --reporters='<rootDir>/test/e2e/utils/image-reporter.js'",
     "testServer": "nuxt build && nuxt start --port 3000"
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.11.0",
-    "nuxt": "^2.13.0"
+    "nuxt": "^2.13.0",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^3.0.0",
     "@nuxtjs/eslint-module": "^2.0.0",
     "@vue/test-utils": "^1.0.3",
+    "aws-sdk": "^2.728.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.0.1",
@@ -29,9 +32,12 @@
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.0.1",
+    "jest-image-snapshot": "^4.1.0",
     "jest-puppeteer": "^4.4.0",
+    "jest-puppeteer-preset": "^4.4.0",
     "prettier": "^2.0.5",
     "puppeteer": "^5.2.1",
+    "serverless": "^1.78.1",
     "vue-jest": "^3.0.4"
   }
 }
